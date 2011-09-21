@@ -1,6 +1,6 @@
 module.exports = (function() {
-	var express = require('express');
-	var app = express.createServer();
+	var express = require('express'),
+		app = express.createServer();
 	return {
 		configure: function(options) {		
 			//General configuration
@@ -31,9 +31,12 @@ module.exports = (function() {
 				console.log('Request for song + artist received.');
 				var artistName = req.params.artistName.replace(/\s/g, '%20');
 				var songName = req.params.songName.replace(/\s/g, '%20');
-				wordsm.lyrics.getLyricText({artist: artistName, song: songName}, function(string) {
-					res.send(JSON.stringify(wordsm.lyrics.extractWords(string)));
+				wordsm.lyrics.getTopWords({artist: artistName, song: songName}, function(err, topWords) {
+					if (!err) {
+						res.send(JSON.stringify(topWords));
+					}			
 				});
+				console.log('Proof that process is not being blocked');
 			});
 		},
 		start: function(options) {			

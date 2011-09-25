@@ -22,21 +22,7 @@ module.exports = (function() {
 				app.use(express.static(options.staticDirectory, {maxAge: oneYear}));
 			});	
 		},
-		setRoutes: function(options) {
-			//This route will be removed once I incorporate this inside /artist/song route.
-			app.get('/db/:artist/:song', function(req, res) {
-				var artist = req.params.artist,
-					song   = req.params.song;
-				console.log('Database Request for '+artist + '/' + song + ' received.');
-				wordsm.db.getTopWords({artist:artist, song: song} , function(err, data) {
-					if (err === null) {
-						res.send(JSON.stringify(data.rows[0].value) + '\n');
-					} else {
-						res.send(err.message);					
-						return;
-					}
-				});
-			});
+		setRoutes: function(options) {			
 			app.get('/:artist/:song', function(req, res) {
 				var artist = req.params.artist,
 					song   = req.params.song;
@@ -45,7 +31,7 @@ module.exports = (function() {
 					if (err === null) {
 						res.send(JSON.stringify(topWords) + '\n');
 					} else {
-						res.send(err.message);					
+						res.send('{"error":' + err.message + '}\n');					
 						return;
 					}
 				});

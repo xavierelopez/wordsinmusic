@@ -23,20 +23,32 @@ module.exports = (function() {
 			});	
 		},
 		setRoutes: function(options) {
-			app.get('/test', function(req, res) {
-				console.log('Request Received.');
-				res.send('hello world');
-			});
-			app.get('/:artistName/:songName', function(req, res) {
-				console.log('Request for song + artist received.');
-				var artistName = req.params.artistName.replace(/\s/g, '%20');
-				var songName = req.params.songName.replace(/\s/g, '%20');
-				wordsm.lyrics.getTopWords({artist: artistName, song: songName}, function(err, topWords) {
-					if (!err) {
-						res.send(JSON.stringify(topWords));
-					}			
+			//This route will be removed once I incorporate this inside /artist/song route.
+			app.get('/db/:artist/:song', function(req, res) {
+				var artist = req.params.artist,
+					song   = req.params.song;
+				console.log('Database Request for '+artist + '/' + song + ' received.');
+				wordsm.db.getTopWords({artist:artist, song: song} , function(err, data) {
+					if (err === null) {
+						res.send(JSON.stringify(data.rows[0].value) + '\n');
+					} else {
+						res.send(err.message);					
+						return;
+					}
 				});
-				console.log('Proof that process is not being blocked');
+			});
+			app.get('/:artist/:song', function(req, res) {
+				var artist = req.params.artist,
+					song   = req.params.song;
+				console.log('Request for '+artist + '/' + song + ' received.');
+				wordsm.lyrics.getTopWords({artist: artist, song: song}, function(err, topWords) {
+					if (err === null) {
+						res.send(JSON.stringify(topWords) + '\n');
+					} else {
+						res.send(err.message);					
+						return;
+					}
+				});
 			});
 		},
 		start: function(options) {			

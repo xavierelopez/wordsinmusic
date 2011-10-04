@@ -1,68 +1,60 @@
-XELV.WordsInMusic = (function() {
-	var that, log;
-	that = {};
-	log = XELV.log;
+xelv.wordsm = (function() {
+	var log = XELV.log;
+	function model (options) {		
+		return new (Backbone.Model.extend(options.properties))(options.params);	
+	}
+	function view (options) {		
+		return new (Backbone.View.extend(options.properties))(options.params);	
+	}
 	
-	//Private Vars
-
-	
-	//Public functions
-	var createModel = function(spec) {
-		switch(spec.modelName) {
-			case 'song': {return song(spec.params);}
-			case 'word': {return word(spec.params);}
-			return null;
-		}
-	};
-	
-	//Private Functions
-	
-	//Backbone Models
-	
-	//constructor function for creating Backbone Models
-	//models START
-	var model = function(spec) {		
-		return new (Backbone.Model.extend(spec.properties))(spec.params);	
-	};
-	
-	var view = function(spec) {		
-		return new (Backbone.View.extend(spec.properties))(spec.params);	
-	};
-	
-	var song = function(params) {
-		var spec = spec || {};
-		spec.properties = spec.properties || {};
-		spec.properties.params = params;
-		spec.properties.defaults = {
-				title: 'Let Down',
+	//Models
+	function song (options) {
+		var options = options || {};
+		options.properties = options.properties || {};
+		options.params = params;
+		options.properties.defaults = {
+				song: 'Let Down',
 				artist: 'Radiohead',
-				words: [{name: 'down', count: '10'}]			
+				topWords: [{word: 'down', count: '10'}]			
 		};
-		return model(spec);	
-	};
+		return model(options);			
+	}
 	
-	
-	var word = function(params) {
-		var spec = spec || {};
-		spec.properties = spec.properties || {};
-		spec.properties.params = params;
-		spec.properties.defaults = {
+	function word (options) {
+		var options = options || {};
+		options.properties = options.properties || {};
+		options.params = params;
+		options.properties.defaults = {
 				word: 'down',
 				count: 10
 		};
-		return model(spec);	
+		return createModel(options);	
+
+	}
+	return {
+		createModel: function(options) {
+			switch(options.modelName) {
+				case 'song': {return song(options.params);}
+				case 'word': {return word(options.params);}
+				return null;
+			}
+		}
 	};
+		
+
+	
+	
 	//models END
 	
 	//Backbone Views
 	
 	var songView = function(params) {
-		var spec = spec || {};
-		spec.properties = spec.properties || {};
-		spec.properties.template = '#song-template';
-        spec.properties.tag = 'li';
-        spec.properties.className = 'song';
-		return view(spec);
+		var options = options || {};
+		options.properties = options.properties || {};
+		options.properties.template = '#song-template';
+        options.properties.tag = 'li';
+        options.properties.className = 'song';
+		return view(options);
 	};
 	
 	that.createModel = createModel;

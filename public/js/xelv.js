@@ -1,6 +1,6 @@
 //Create my namespace
 //Every app will be a property of this global XELV object
-window.XELV = (function () {
+window.xelv = (function () {
 	var that;
 	that = {};
 		

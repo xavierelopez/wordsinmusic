@@ -1,28 +1,20 @@
-xelv.wordsm.models = {};
-
-
-xelv.wordsm.models.SearchBar = Backbone.extend({
+(function() {
+	var m = xelv.wordsm.models = {};
+	m.TopWords  = Backbone.extend({
+		
+		
+	};
 	
+	m.Song = Backbone.extend({
+				
+	};
 	
-};
-
-xelv.wordsm.models.TopWords  = Backbone.extend({
+	m.Artist = Backbone.extend({
+				
+	};
 	
-	
-};
-
-xelv.wordsm.models.Song = Backbone.extend({
-	
-	
-};
-
-xelv.wordsm.models.Artist = Backbone.extend({
-	
-	
-};
-
-xelv.wordsm.models.Album = Backbone.extend({
-	
-	
-};
-
+	m.Album = Backbone.extend({
+		
+		
+	};
+})();

@@ -13,6 +13,7 @@ module.exports = (function() {
 			//Configuration for development only
 			app.configure('development', function() {
 				app.use(express.static(options.staticDirectory));
+				app.use(express.compiler({ src: options.staticDirectory + '/less/', enable: ['less'] }));
 				app.use(express.errorHandler({dumbExceptions: true, showStack: true}));
 			});
 			
@@ -22,8 +23,15 @@ module.exports = (function() {
 				app.use(express.static(options.staticDirectory, {maxAge: oneYear}));
 			});	
 		},
-		setRoutes: function(options) {			
-			app.get('/:artist/:song', function(req, res) {
+		
+		setRoutes: function(options) {
+			app.get('/test', function(req, res) {	
+				var aString = '<B>6,00,234</B>'; //the original string
+     			var regex = /(<B>)([\w,\d]+)(<\/B>)/g; //regular expression
+    			var match = regex.exec(aString); //get the match for that string
+    			res.send(match[2]);
+    		});		
+			app.get('/getTopWords/:artist/:song', function(req, res) {
 				var artist = req.params.artist,
 					song   = req.params.song;
 				console.log('Request for '+artist + '/' + song + ' received.');
@@ -37,6 +45,7 @@ module.exports = (function() {
 				});
 			});
 		},
+		
 		start: function(options) {			
 			this.configure({staticDirectory: options.staticDirectory});
 			this.setRoutes({});

@@ -1,28 +1,12 @@
-xelv.wordsm.models = {};
-
-
-xelv.wordsm.models.SearchBar = Backbone.extend({
-	
-	
-};
-
-xelv.wordsm.models.TopWords  = Backbone.extend({
-	
-	
-};
-
-xelv.wordsm.models.Song = Backbone.extend({
-	
-	
-};
-
-xelv.wordsm.models.Artist = Backbone.extend({
-	
-	
-};
-
-xelv.wordsm.models.Album = Backbone.extend({
-	
-	
-};
+//models module
+define(['util', 'order!vendor/underscore-1.1.7', 'order!vendor/backbone-0.5.3'], function(util) {	
+	return {
+		'Song': Backbone.Model.extend({
+			urlRoot: 'topWords'
+		}),
+		'SearchBar': Backbone.Model.extend({
+			
+		})
+	};
+});
 

@@ -23,7 +23,7 @@ module.exports = (function() {
 			});	
 		},
 		setRoutes: function(options) {			
-			app.get('/:artist/:song', function(req, res) {
+			app.get('/topWords/:song-:artist', function(req, res) {
 				var artist = req.params.artist,
 					song   = req.params.song;
 				console.log('Request for '+artist + '/' + song + ' received.');

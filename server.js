@@ -23,15 +23,8 @@ module.exports = (function() {
 				app.use(express.static(options.staticDirectory, {maxAge: oneYear}));
 			});	
 		},
-		
-		setRoutes: function(options) {
-			app.get('/test', function(req, res) {	
-				var aString = '<B>6,00,234</B>'; //the original string
-     			var regex = /(<B>)([\w,\d]+)(<\/B>)/g; //regular expression
-    			var match = regex.exec(aString); //get the match for that string
-    			res.send(match[2]);
-    		});		
-			app.get('/getTopWords/:artist/:song', function(req, res) {
+		setRoutes: function(options) {			
+			app.get('/topWords/:song-:artist', function(req, res) {
 				var artist = req.params.artist,
 					song   = req.params.song;
 				console.log('Request for '+artist + '/' + song + ' received.');

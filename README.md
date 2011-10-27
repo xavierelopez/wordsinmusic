@@ -13,4 +13,4 @@ Implemented so far:
 - Top words are obtained from the lyrics.
 - Can read from CouchDB database
 - Can get topWords for given song and artist using data from database.
-- Can search for display topWords correctly on page
+- Can search for and display topWords for given song and artist using GUI

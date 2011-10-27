@@ -32,6 +32,7 @@ module.exports = (function() {
 					if (err === null) {
 						res.send(JSON.stringify(topWords) + '\n');
 					} else {
+						console.log('Got error');
 						res.send('{"error":' + err.message + '}\n');					
 						return;
 					}

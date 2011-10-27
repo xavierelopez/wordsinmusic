@@ -12,10 +12,105 @@
     <![endif]-->
 
     <!-- Le styles -->
+    <style>
+	    #searchSong {
+	    	margin-left: 400px;
+	    	margin-bottom:50px;
+	    }
+	    #results {
+	    	
+	    }
+	    
+	    #instructionsMessage {
+	    	text-align: center
+	    }
+    </style>
     <link rel="stylesheet/less" href="less/bootstrap.less" media="all" />
 	<script src="js/vendor/less-1.1.3.min.js"></script>
 
 	<script data-main="js/main" src="js/require-jquery.js"></script>
+	<script type="text/template" id ="header-template">
+		<div class="hero-unit"> 
+		<h1>Welcome to Words in Music!</h1> 
+	    <p>Search your favorite songs for the most used words in seconds. Try it in any of the modes below.</p> 
+	    </div>
+	</script>
+	<script type="text/template" id ="search-template">
+		<div class="container"> 
+			<div class="row">
+				<div id = "instructionsMessage" class="span16">			
+					<h2 class="center-block">Search for a Song</h2> 
+					<p class="center-block">Want to know the words most used by your favorite song? Enter the song title here to find out.</p>
+				</div>
+			</div>
+			<div class="row">	
+					<form> 
+				       <fieldset> 
+				          	<div class="span8"> 
+				            	<label>Song Title</label> 
+				            	<div class="input"> 
+				              		<input name = "song" size="30" type="search" /> 
+				            	</div> 
+				          	</div> 
+				          	<div class="span8"> 
+				            	<label>Artist Name</label> 
+				            	<div class="input"> 
+				              		<input name = "artist" size="30" type="search" /> 
+				            	</div> 
+				          	</div> 
+				  		</fieldset>         				
+					</form>
+				</div>
+			<div class="row">	
+				<div class="span16">
+					<a id = "searchSong" class="btn large default">Search</a>
+				</div>
+			</div>
+		</div>
+	</script>
+	<script type="text/template" id ="results-template">
+		<% if (isBeingSearched) { %>
+			<div id = "results" class="container well">
+				<div class="row">
+					<div class="span10">
+					<h2> Loading... </h2>
+					<div id ="loading" class=""></div>
+					</div>
+				</div>
+			</div>
+		<% } 
+		else if (!_.isEmpty(topWords)) { %>
+			<div id = "results" class="container well">
+				<div class="row">
+					<div class="span10">
+						<h2>Results</h2> 
+						<h3>Words most used in <em><%= name %></em> by <em><%=artist%></em></h3>
+						<p>These are the words most used:</p> 
+						<ul id="words"> 
+							<% _.each(topWords, function(word) { %> 
+								<li><%= word.word %> - <%= word.count %></li> 
+							<% }); %>
+						</ul>
+					</div>
+					<div class ="span6">
+						<h2>Similar Songs</h2>
+					</div>
+				</div>
+			</div>
+		<% } else if ( !_.isBlank(artist) || !_.isBlank(name) ) { %>
+				<div id = "results" class="container well">
+					<div class="row">
+						<div class="span16">
+							<h2>No Words Found<h2>
+							<h4>No song found with given data: <em><%= name %></em> by <em> <%= artist %></em></h4>
+						</div>
+					</div>
+				<div>
+		<% } %>
+	</script>
+	<script type="text/template" id ="footer-template">
+		<p>&copy; Words In Music 2011</p>
+	</script>
   </head>
 
   <body>

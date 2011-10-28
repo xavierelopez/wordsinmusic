@@ -3,7 +3,7 @@
 	"author": "Xavier E. Lopez <xavierelopez@gmail.com>",
 	"version": "0.1.0",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node app.js"
 	},
 	"engines": {  
     	"node":">=0.4.11"

@@ -1,10 +1,21 @@
 {
-	'name': 'wordsm',
-	'version': '0.1',
-	'scripts': {
-		'start': 'node server.js'
+	"name": "Words in Music",
+	"author": "Xavier E. Lopez <xavierelopez@gmail.com>",
+	"version": "0.1",
+	"scripts": {
+		"start": "node server.js"
 	}
-	'dependencies': {
-		
+	"engines": {  
+    	"node":">=0.4.11"
+    }, 
+  	"dependencies": {
+	  "jquery":"0.1.5",
+      "express":"2.4.6",
+      "underscore":"1.1.7",
+      "backbone":"0.5.3",
+      "xml2js":"0.9.3",
+      "less": "1.0",
+      "nano": "1.0"
+  },
 	}
 }

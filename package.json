@@ -1,7 +1,7 @@
 {
 	"name": "Wordsinmusic",
 	"author": "Xavier E. Lopez <xavierelopez@gmail.com>",
-	"version": "0.1",
+	"version": "0.1.0",
 	"scripts": {
 		"start": "node server.js"
 	},
@@ -14,7 +14,7 @@
       "underscore":"1.1.7",
       "backbone":"0.5.3",
       "xml2js":"0.9.3",
-      "less": "1.0",
-      "nano": "1.0"
+      "less": "0.3.0",
+      "nano": "0.3.0"
     }
 }

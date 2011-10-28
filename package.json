@@ -1,5 +1,5 @@
 {
-	"name": "Wordsinmusic",
+	"name": "WordsinMusic",
 	"author": "Xavier E. Lopez <xavierelopez@gmail.com>",
 	"version": "0.1.0",
 	"scripts": {
@@ -9,12 +9,13 @@
     	"node":">=0.4.11"
     }, 
   	"dependencies": {
-	  "jquery":"0.1.5",
+	  "jquery":"1.6.3",
       "express":"2.4.6",
       "underscore":"1.1.7",
       "backbone":"0.5.3",
-      "xml2js":"0.9.3",
-      "less": "0.3.0",
-      "nano": "0.3.0"
+      "xml2js":"0.1.10",
+      "less": "1.1.4",
+      "nano": "0.8.7",
+      "restler": "0.2.1"
     }
 }

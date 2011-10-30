@@ -8,6 +8,7 @@ module.exports = (function() {
 				app.use(express.methodOverride());
 				app.use(express.bodyParser());
 				app.use(app.router);
+				app.use(express.logger('short'));
 			});
 			
 			//Configuration for development only
@@ -27,12 +28,12 @@ module.exports = (function() {
 			app.get('/topWords/:song-:artist', function(req, res) {
 				var artist = req.params.artist,
 					song   = req.params.song;
-				console.log('Request for '+artist + '/' + song + ' received.');
+				//console.log('Request for '+artist + '/' + song + ' received.');
 				wordsm.lyrics.getTopWords({artist: artist, song: song}, function(err, topWords) {
 					if (err === null) {
 						res.send(JSON.stringify(topWords) + '\n');
 					} else {
-						console.log('Got error');
+						//console.log('Got error');
 						res.send('{"error":' + err.message + '}\n');					
 						return;
 					}
@@ -44,6 +45,7 @@ module.exports = (function() {
 			this.configure({staticDirectory: options.staticDirectory});
 			this.setRoutes({});
 			app.listen(options.portNumber);
+			//app.logger.log('Server now listening on port ' + options.portNumber +'.');
 			console.log('Server now listening on port ' + options.portNumber +'.');
 		}
 	};	

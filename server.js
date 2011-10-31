@@ -8,7 +8,6 @@ module.exports = (function() {
 				app.use(express.methodOverride());
 				app.use(express.bodyParser());
 				app.use(app.router);
-				app.use(express.logger('short'));
 			});
 			
 			//Configuration for development only
@@ -38,6 +37,21 @@ module.exports = (function() {
 						return;
 					}
 				});
+			});
+			
+			app.get('/test-similarity', function(req, res) {
+				var array1, array2, word1, word2, word3, word4, options;
+				word1 = {'word':'testword1', 'count': 1};
+				word2 = {'word':'testword2', 'count': 1};
+				word3 = {'word':'testword3', 'count': 1};
+				word4 = {'word':'testword4', 'count': 1};
+				
+				array1 = [word1, word2];
+				array2 = [word2, word1];
+				options = {'byProperty': 'word', 'usingFrequency': 'count'};
+				wordsm.util.findSimilarity(array1, array2, options, function(result) {
+					res.send(JSON.stringify(result));			
+				});		
 			});
 		},
 		

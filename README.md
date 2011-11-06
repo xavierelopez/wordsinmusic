@@ -14,3 +14,4 @@ Implemented so far:
 - Can read from CouchDB database
 - Can get topWords for given song and artist using data from database.
 - Can search for and display topWords for given song and artist using GUI
+- Now have a function that can compare two given songs in place. Still need to integrate it to DB.
